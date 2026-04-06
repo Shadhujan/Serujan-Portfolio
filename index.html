@@ -619,6 +619,54 @@
     text-shadow: 0 1px 6px rgba(0,0,0,0.6);
   }
 
+  /* ─── RESUME LIST ─── */
+  .resume-section { margin-top: 64px; }
+  .resume-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 16px;
+  }
+  .resume-list { list-style: none; margin-bottom: 56px; }
+  .resume-item {
+    display: flex; gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: transform 0.3s ease, padding-left 0.3s ease;
+  }
+  .resume-item:hover {
+    transform: translateX(6px);
+    border-color: var(--gold-dim);
+  }
+  .resume-date {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem; color: var(--muted);
+    min-width: 140px; padding-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .resume-details { flex: 1; }
+  .resume-title {
+    font-family: 'Cormorant', serif;
+    font-size: 1.4rem; font-weight: 500;
+    color: var(--text); margin-bottom: 6px;
+    line-height: 1.25;
+    transition: color 0.3s;
+  }
+  .resume-item:hover .resume-title { color: var(--gold-bright); }
+  .resume-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; color: var(--gold-dim);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .resume-item { flex-direction: column; gap: 8px; padding: 20px 0; }
+    .resume-date { min-width: auto; padding-top: 0; font-size: 0.65rem; }
+    .resume-item:hover { transform: none; padding-left: 8px; }
+  }
+
   .stats { display: flex; flex-direction: column; gap: 0; }
   .stat {
     padding: 36px 0;
@@ -997,8 +1045,46 @@
       <span>Download Résumé</span>
       <span class="btn-resume-arrow">→</span>
     </a>
-  </div>
+    </a>
 
+    <div class="resume-section fade-up" style="transition-delay:0.1s">
+      <h3 class="resume-heading">Experience</h3>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="resume-date">05/2025 — 02/2026</div>
+          <div class="resume-details">
+            <div class="resume-title">Associate Mobile Application Developer</div>
+            <div class="resume-company">Trivyol Inc</div>
+          </div>
+        </li>
+        <li class="resume-item">
+          <div class="resume-date">11/2024 — 05/2025</div>
+          <div class="resume-details">
+            <div class="resume-title">Mobile Application Developer Intern</div>
+            <div class="resume-company">AUS-Etech</div>
+          </div>
+        </li>
+        <li class="resume-item">
+          <div class="resume-date">2022 — 2024</div>
+          <div class="resume-details">
+            <div class="resume-title">Graphic Designer</div>
+            <div class="resume-company">Oceanic Boime</div>
+          </div>
+        </li>
+      </ul>
+
+      <h3 class="resume-heading">Education</h3>
+      <ul class="resume-list">
+        <li class="resume-item">
+          <div class="resume-date">2021 — 2025</div>
+          <div class="resume-details">
+            <div class="resume-title">Bsc (Hons) Information Technology</div>
+            <div class="resume-company">Horizon Campus Srilanka</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="about-right fade-up" style="transition-delay:0.15s">
     <div class="about-photo-wrap">
       <img src="Public/pfp.jpeg" alt="Serujan Satkunanathan — Graphic Designer" class="about-photo" loading="lazy">
