@@ -322,6 +322,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: auto;
+    grid-auto-flow: dense;
     gap: 3px;
   }
 
@@ -334,11 +335,12 @@
   }
   .gallery-item:hover { border-color: var(--gold-dim); }
 
-  /* ── Layout classes set by JS ── */
-  .gi-hero   { grid-column: 1 / 8;  aspect-ratio: 16/10; }
-  .gi-tall   { grid-column: 8 / 13; aspect-ratio: 3/4; grid-row: span 2; }
-  .gi-square { grid-column: span 4; aspect-ratio: 1/1; }
-  .gi-wide   { grid-column: 1 / 13; aspect-ratio: 21/7; }
+  /* ── Layout classes set by JS based on image orientation ── */
+  .gi-landscape { grid-column: span 8;  aspect-ratio: 16/9; }
+  .gi-portrait  { grid-column: span 4;  aspect-ratio: 3/4; }
+  .gi-square    { grid-column: span 4;  aspect-ratio: 1/1; }
+  .gi-wide      { grid-column: span 12; aspect-ratio: 21/9; }
+  .gi-portrait-tall { grid-column: span 4; aspect-ratio: 2/5; }
 
   /* ── Gradient background layer ── */
   .card-gradient {
@@ -421,8 +423,11 @@
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1);
+    cursor: default;
   }
   .lightbox.is-open { opacity: 1; pointer-events: auto; }
+  body.lightbox-open #cursor-dot,
+  body.lightbox-open #cursor-ring { display: none !important; }
 
   .lightbox-close {
     position: absolute; top: 32px; right: 44px;
@@ -430,8 +435,9 @@
     width: 48px; height: 48px;
     display: flex; align-items: center; justify-content: center;
     color: var(--muted); font-size: 1.3rem;
-    cursor: none;
+    cursor: pointer;
     transition: color 0.3s, border-color 0.3s;
+    z-index: 10001;
   }
   .lightbox-close:hover { color: var(--gold); border-color: var(--gold-dim); }
 
@@ -492,7 +498,7 @@
     border: 1px solid var(--rule); background: transparent;
     color: var(--muted); font-size: 1rem;
     display: flex; align-items: center; justify-content: center;
-    cursor: none;
+    cursor: pointer;
     transition: color 0.3s, border-color 0.3s, background 0.3s;
   }
   .lightbox-nav button:hover {
@@ -809,10 +815,11 @@
     footer { padding: 24px 32px; }
     .marquee-wrap { margin: 0 -32px; }
     #about { grid-template-columns: 1fr; gap: 56px; }
-    .gi-hero { grid-column: 1 / 13; }
-    .gi-tall  { grid-column: 1 / 7; grid-row: auto; aspect-ratio: 4/3; }
-    .gi-square { grid-column: span 6; }
-    .gi-wide  { grid-column: 1 / 13; }
+    .gi-landscape { grid-column: span 12; }
+    .gi-portrait  { grid-column: span 6; }
+    .gi-square    { grid-column: span 6; }
+    .gi-wide      { grid-column: span 12; }
+    .gi-portrait-tall { grid-column: span 6; }
   }
 
   @media (max-width: 768px) {
@@ -823,10 +830,14 @@
     footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
     .marquee-wrap { margin: 0 -24px; }
     .gallery-grid { grid-template-columns: 1fr; gap: 2px; }
-    .gi-hero, .gi-tall, .gi-square, .gi-wide {
-      grid-column: 1; grid-row: auto; aspect-ratio: 16/9;
+    .gi-landscape, .gi-portrait, .gi-square, .gi-wide, .gi-portrait-tall {
+      grid-column: 1; grid-row: auto;
     }
-    .gi-tall { aspect-ratio: 4/3; }
+    .gi-landscape { aspect-ratio: 16/9; }
+    .gi-portrait  { aspect-ratio: 3/4; }
+    .gi-square    { aspect-ratio: 1/1; }
+    .gi-wide      { aspect-ratio: 16/9; }
+    .gi-portrait-tall { aspect-ratio: 2/5; }
     .card-image-reveal { clip-path: inset(0% 0 0 0); }
     .card-image-reveal img { filter: contrast(1) brightness(0.7); }
     .filter-bar { gap: 6px; }
@@ -1176,26 +1187,28 @@
     rebindHoverTargets();
   }
 
-  /* ── Layout pattern for staggered grid ── */
-  var layoutPattern = [
-    'gi-hero',   // 0: wide hero (col 1-7)
-    'gi-tall',   // 1: tall portrait (col 8-13, spans 2 rows)
-    'gi-square', // 2: square (4 cols)
-    'gi-square', // 3: square (4 cols)
-    'gi-wide',   // 4: full-width panoramic
-    'gi-hero',   // 5: repeat
-    'gi-tall',   // 6:
-    'gi-square', // 7:
-    'gi-square', // 8:
-    'gi-wide',   // 9:
-    'gi-square', // 10:
-  ];
+  /* ── Determine layout class from image data ── */
+  function getLayoutClass(item) {
+    var w = item.width || 1;
+    var h = item.height || 1;
+    var ratio = w / h;
+    var orient = (item.orientation || '').toLowerCase();
+
+    if (orient.indexOf('portrait') !== -1 && ratio < 0.5) {
+      return 'gi-portrait-tall'; // Very tall portrait (e.g. 462x1156)
+    } else if (orient.indexOf('portrait') !== -1 || ratio < 0.85) {
+      return 'gi-portrait'; // Normal portrait
+    } else if (orient.indexOf('landscape') !== -1 || ratio > 1.4) {
+      return 'gi-landscape'; // Landscape
+    } else {
+      return 'gi-square'; // Square (ratio ~0.85-1.4)
+    }
+  }
 
   /* ── Generate decorative SVG per card ── */
   function generateDecorSVG(colors, layoutClass) {
     var c = colors[1] || '#BFA060';
-    var letter = '';
-    if (layoutClass === 'gi-hero') {
+    if (layoutClass === 'gi-landscape' || layoutClass === 'gi-wide') {
       return '<svg viewBox="0 0 700 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">' +
         '<circle cx="520" cy="200" r="180" fill="none" stroke="' + c + '" stroke-width="0.5" opacity="0.2"/>' +
         '<circle cx="520" cy="200" r="130" fill="none" stroke="' + c + '" stroke-width="0.5" opacity="0.14"/>' +
@@ -1203,18 +1216,11 @@
         '<line x1="340" y1="200" x2="700" y2="200" stroke="' + c + '" stroke-width="0.4" opacity="0.1"/>' +
         '<line x1="520" y1="20"  x2="520" y2="380" stroke="' + c + '" stroke-width="0.4" opacity="0.1"/>' +
       '</svg>';
-    } else if (layoutClass === 'gi-tall') {
+    } else if (layoutClass === 'gi-portrait' || layoutClass === 'gi-portrait-tall') {
       return '<svg viewBox="0 0 300 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="60" y="100" width="180" height="300" fill="none" stroke="' + c + '" stroke-width="0.5" opacity="0.15"/>' +
         '<rect x="80" y="120" width="140" height="260" fill="none" stroke="' + c + '" stroke-width="0.3" opacity="0.1"/>' +
         '<line x1="0" y1="250" x2="300" y2="250" stroke="' + c + '" stroke-width="0.4" opacity="0.08"/>' +
-      '</svg>';
-    } else if (layoutClass === 'gi-wide') {
-      return '<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">' +
-        '<line x1="0" y1="100" x2="1200" y2="100" stroke="' + c + '" stroke-width="0.5" opacity="0.08"/>' +
-        '<circle cx="200" cy="100" r="60" fill="none" stroke="' + c + '" stroke-width="0.4" opacity="0.12"/>' +
-        '<circle cx="600" cy="100" r="80" fill="none" stroke="' + c + '" stroke-width="0.4" opacity="0.1"/>' +
-        '<circle cx="1000" cy="100" r="50" fill="none" stroke="' + c + '" stroke-width="0.4" opacity="0.1"/>' +
       '</svg>';
     } else {
       return '<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">' +
@@ -1232,12 +1238,11 @@
 
     data.forEach(function(item, idx) {
       var imgPath = item.image.replace(/^public\//, 'Public/');
-      var layout = layoutPattern[idx % layoutPattern.length];
+      var layout = getLayoutClass(item);
       var colors = item.colorTheme || ['#0A0908', '#BFA060', '#F0EAE0'];
 
       // Build gradient from colorTheme
       var c0 = colors[0], c1 = colors[1], c2 = colors[2] || colors[0];
-      // Darken the primary color for the base gradient
       var gradientStyle = 'linear-gradient(135deg, ' + c0 + ' 0%, ' + mixColor(c0, c1, 0.2) + ' 50%, ' + mixColor(c0, '#000000', 0.4) + ' 100%)';
 
       var card = document.createElement('div');
@@ -1289,11 +1294,13 @@
     updateLightbox();
     lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('lightbox-open');
   }
 
   function closeLightbox() {
     lightbox.classList.remove('is-open');
     document.body.style.overflow = '';
+    document.body.classList.remove('lightbox-open');
   }
 
   function updateLightbox() {
