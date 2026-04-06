@@ -340,7 +340,7 @@
   .gi-portrait  { grid-column: span 4;  aspect-ratio: 3/4; }
   .gi-square    { grid-column: span 4;  aspect-ratio: 1/1; }
   .gi-wide      { grid-column: span 12; aspect-ratio: 21/9; }
-  .gi-portrait-tall { grid-column: span 4; aspect-ratio: 2/5; }
+  .gi-portrait-tall { grid-column: span 4; aspect-ratio: 9/16; }
 
   /* ── Gradient background layer ── */
   .card-gradient {
@@ -837,7 +837,7 @@
     .gi-portrait  { aspect-ratio: 3/4; }
     .gi-square    { aspect-ratio: 1/1; }
     .gi-wide      { aspect-ratio: 16/9; }
-    .gi-portrait-tall { aspect-ratio: 2/5; }
+    .gi-portrait-tall { aspect-ratio: 9/16; }
     .card-image-reveal { clip-path: inset(0% 0 0 0); }
     .card-image-reveal img { filter: contrast(1) brightness(0.7); }
     .filter-bar { gap: 6px; }
@@ -1100,7 +1100,7 @@
       <span class="italic-gold">in mind?</span>
     </h2>
     <br>
-    <a href="mailto:hello@serujan.com" class="contact-email">hello@serujan.com</a>
+    <a href="mailto:Serujansatkunanathan@gmail.com" class="contact-email">Serujansatkunanathan@gmail.com</a>
     <br><br>
     <div class="socials">
       <a href="#" target="_blank" rel="noopener">Behance</a>
@@ -1109,14 +1109,14 @@
       <span class="social-dot label">·</span>
       <a href="#" target="_blank" rel="noopener">Instagram</a>
       <span class="social-dot label">·</span>
-      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/serujansatkunanathan" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span>© 2024 Serujan Satkunanathan</span>
+  <span>© 2026 Serujan Satkunanathan</span>
   <span>Colombo, Sri Lanka</span>
 </footer>
 
@@ -1192,16 +1192,13 @@
     var w = item.width || 1;
     var h = item.height || 1;
     var ratio = w / h;
-    var orient = (item.orientation || '').toLowerCase();
 
-    if (orient.indexOf('portrait') !== -1 && ratio < 0.5) {
-      return 'gi-portrait-tall'; // Very tall portrait (e.g. 462x1156)
-    } else if (orient.indexOf('portrait') !== -1 || ratio < 0.85) {
-      return 'gi-portrait'; // Normal portrait
-    } else if (orient.indexOf('landscape') !== -1 || ratio > 1.4) {
+    if (ratio < 0.8) {
+      return 'gi-portrait'; // Portrait (any aspect ratio)
+    } else if (ratio > 1.5) {
       return 'gi-landscape'; // Landscape
     } else {
-      return 'gi-square'; // Square (ratio ~0.85-1.4)
+      return 'gi-square'; // Square-ish (ratio 0.8-1.5)
     }
   }
 
