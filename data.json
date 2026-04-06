@@ -1,0 +1,210 @@
+{
+    "basics": {
+        "name": "Serujan Satkunanathan",
+        "email": "serujansatkunanathan@gmail.com",
+        "phone": "+94755049713",
+        "location": {
+            "countryCode": "LK"
+        },
+        "profiles": [
+            {
+                "network": "Linkedin",
+                "url": ""
+            },
+            {
+                "network": "Github",
+                "url": ""
+            },
+            {
+                "network": "Portfolio",
+                "url": ""
+            }
+        ],
+        "summary": "I began as a Flutter developer, but users wanted apps that could think, not just run static code. That pushed me to learn LLMs, vector databases, and retrieval systems. I've been building with LangChain, experimenting with RAG, and connecting apps to external data to give real, useful answers. I'm still learning, which is how I like to work.At Trivyol, I worked on a government environmental project with constantly changing requirements. I learned to understand stakeholder needs and translate them clearly to the backend team, bridging the gap between people and technology."
+    },
+    "work": [
+        {
+            "company": "Trivyol Inc",
+            "position": "Associate Mobile Application Developer",
+            "startDate": "05/2025",
+            "endDate": "02/2026",
+            "highlights": [
+                "Contributed to Apaluma, a government-backed platform focused on transforming environmental data into actionable intelligence for public and institutional use.",
+                "Developed a location-based mobile application using Flutter with Google Maps integration to provide real-time weather and environmental insights.",
+                "Implemented live weather updates, continuous location tracking, and state management using Provider for scalable and maintainable performance.",
+                "Collaborated with designers, backend engineers, and government stakeholders to deliver a responsive, intuitive, and data-driven user experience, aligned with national environmental data standards and public sector design principles."
+            ]
+        },
+        {
+            "company": "AUS-Etech",
+            "position": "Mobile Application Developer Intern",
+            "startDate": "11/2024",
+            "endDate": "05/2025",
+            "highlights": [
+                "Developed Crush Date, a cross-platform dating app in Flutter, with features including chat, user profiles.",
+                "Built Task Chase, a freelancer-like app, where I developed the entire UI and integrated user authentication with backend.",
+                "Developed and maintained backend services using Laravel and Firebase (authentication, real-time database, APIs).",
+                "Created and customized an admin panel to manage users and content.",
+                "Supported branding efforts by designing logos and marketing materials.",
+                "Also spent time documenting how the APIs worked so the team had clear references."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Horizon Campus Srilanka",
+            "studyType": "Bsc (Hons)",
+            "area": "Information Technology",
+            "startDate": "2021",
+            "endDate": "2025",
+            "score": "3.21"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Apaluma",
+            "entity": "Trivyol Inc",
+            "description": "An AI-driven environmental intelligence platform that digitizes and visualizes regulatory data on air, water, and waste.",
+            "highlights": [
+                "Developed core mobile app features using Flutter \u2013 including live weather updates, Google Maps integration, real- time tracking, and state management with Provider.",
+                "IOS | Android"
+            ]
+        },
+        {
+            "name": "Crush Date",
+            "entity": "AUS-Etech",
+            "description": "Cross-platform dating app with chat, user profiles, and push notifications. Backend handled with Laravel and Firebase for authentication and real-time messaging."
+        },
+        {
+            "name": "Recognify",
+            "description": "AI-based facial recognition system using DeepFace and FaceNet with a web interface. The backend was developed using Flask."
+        },
+        {
+            "name": "Task Chase",
+            "entity": "AUS-Etech",
+            "description": "Freelancer-like app where I developed the complete UI and implemented authentication workflows."
+        },
+        {
+            "name": "Lockage",
+            "description": "(Currently Building) Currently building a location aware luggage storage web platform using Google Antigravity. The system features smart location recommendations, office based storage management, QR-based bookings, and a modern, scalable full-stack architecture."
+        },
+        {
+            "name": "Space Talk",
+            "description": "Chat app with Firebase backend, secure login, and friend request system via email."
+        },
+        {
+            "name": "Fusion",
+            "description": "Conversational AI app using Gemini API for personalized virtual assistance."
+        },
+        {
+            "name": "Weather App",
+            "description": "Real-time weather tracking with OpenWeather API and clean Flutter UI."
+        }
+    ],
+    "certifications": [
+        {
+            "name": "Flutter Application Developement",
+            "issuer": "Guvi India"
+        }
+    ],
+    "languages": [
+        {
+            "language": "English"
+        },
+        {
+            "language": "Sinhala"
+        },
+        {
+            "language": "Tamil"
+        }
+    ],
+    "skills": [
+        {
+            "name": "Mobile Application Development",
+            "keywords": [
+                "Flutter",
+                "Dart",
+                "Provider (State Management)",
+                "REST API Integration",
+                "Firebase Integration",
+                "Responsive UI",
+                "Cross-Platform Mobile Development (Android & iOS)"
+            ]
+        },
+        {
+            "name": "Data Analytics & Business Intelligence",
+            "keywords": [
+                "Power BI",
+                "Power BI Service",
+                "Data Visualization",
+                "Dashboard Development",
+                "Data Cleaning & Transformation",
+                "Exploratory Data Analysis (EDA)"
+            ]
+        },
+        {
+            "name": "Programming Languages & OOP",
+            "keywords": [
+                "Dart",
+                "Python",
+                "SQL",
+                "PHP",
+                "Strong Object-Oriented Programming (Dart, Python)"
+            ]
+        },
+        {
+            "name": "Frameworks & Libraries",
+            "keywords": [
+                "Flutter",
+                "FastAPI",
+                "LangChain",
+                "Pandas",
+                "NumPy",
+                "Matplotlib",
+                "Flask",
+                "Laravel"
+            ]
+        },
+        {
+            "name": "Tools & Platforms",
+            "keywords": [
+                "Git",
+                "GitHub",
+                "Postman",
+                "Selenium",
+                "Power BI",
+                "Microsoft Office (Excel, Word, PowerPoint)",
+                "Photoshop",
+                "Claude",
+                "Antigravity",
+                "Cursor"
+            ]
+        },
+        {
+            "name": "AI & LLM Integration",
+            "keywords": [
+                "Retrieval-Augmented Generation (RAG)",
+                "Vector Databases",
+                "LLM API Integration",
+                "Prompt Engineering",
+                "AI Agent Development"
+            ]
+        },
+        {
+            "name": "Systems Analysis & Design",
+            "keywords": [
+                "Functional Wireframing",
+                "Flow Diagrams",
+                "System Architecture Documentation",
+                "Technical Requirement Translation"
+            ]
+        },
+        {
+            "name": "Cloud & AWS",
+            "keywords": [
+                "AWS (EC2, S3, IAM)",
+                "Cloud Storage"
+            ]
+        }
+    ]
+}

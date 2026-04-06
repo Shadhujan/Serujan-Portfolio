@@ -1,0 +1,28 @@
+{
+    "basics": {
+        "name": "Serujan Satkunanathan",
+        "email": "serujansatkunanathan@gmail.com",
+        "phone": "+94755049713",
+        "location": {
+            "countryCode": "LK"
+        },
+        "profiles": [
+            {
+                "network": "Linkedin",
+                "url": ""
+            },
+            {
+                "network": "Github",
+                "url": ""
+            },
+            {
+                "network": "Portfolio",
+                "url": ""
+            }
+        ]
+    },
+    "skills": [],
+    "work": [],
+    "education": [],
+    "projects": []
+}
